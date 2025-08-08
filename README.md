@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Mini E-commerce Catalog — Smart NLP Search
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What this project does
+A small catalog (10 static products) plus a Smart Product Search (Option A) where users can search using natural language. The server uses OpenAI to convert the NL query into structured JSON filters, then filters the local JSON catalog and returns results.
 
-## Available Scripts
+## Files
+- server/
+  - index.js
+  - package.json
+  - data/products.json
+  - .env (contains OPENAI_API_KEY)
+- client/
+  - (create-react-app) - replace src/App.js with the provided file
 
-In the project directory, you can run:
+## How to run (dev)
+1. Clone or copy files into `server` and `client` folders.
+2. In `server/`:
+   ```bash
+   cd server
+   npm install
+   # create .env with OPENAI_API_KEY=sk-...
+   npm run dev
+   ```
+3. In client/:
 
-### `npm start`
+```bash
+cd client
+npm install
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# optionally add "proxy": "http://localhost:4000" to client/package.json
+npm start
+```
+4. Open http://localhost:3000 and try queries like:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* running shoes under $100 with good reviews
 
-### `npm test`
+* show me electronics below $50
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* yoga or fitness items rating 4.5+
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Which AI feature
+- Smart Product Search (NLP) using OpenAI Chat Completion (model: gpt-4o-mini or similar).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- The server sends the user query and a system prompt asking the model to return ONLY a JSON object describing max_price, min_price, category, min_rating, and keywords.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Tools / libraries used
+Node.js, Express
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- node-fetch (for OpenAI REST call)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- React (create-react-app)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- OpenAI API (Chat completions)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Notable assumptions
+- Small static catalog (no DB).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- The model returns valid JSON; server tries to robustly parse the first JSON block.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- The app trusts the model’s category normalization (if model returns category that doesn't match product categories it will return no results; you can augment prompt to map synonyms).
 
-### Code Splitting
+- For production, you'd validate model output more thoroughly and/or use embeddings / vector search.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Possible improvements
+- Use embeddings + semantic search for better matching.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Add user session to build recommendations and context-aware search (RAG).
 
-### Making a Progressive Web App
+- Add caching for model outputs and rate-limiting.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+# 5) Video walkthrough script (2–3 minutes)
+Record this while screen-sharing the local app.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Script (about 2 minutes):**
+1. Intro (10s): “Hi — this is a 2-3 minute walkthrough of the Mini E-commerce Catalog with Smart NLP Search. I’ll show the UI, how natural-language queries work, and the architecture.”
+2. UI demo (45s): Open the app, show the static catalog, then type:  
+   - “running shoes under $100 with good reviews” → press Search → show parsed filters and results.  
+   - Try one more: “electronics under $50” → show results or empty set.
+3. Explain backend (30s): “The frontend sends the user query to `/api/search`. The Express server sends a prompt to OpenAI asking it to return a JSON object with `max_price`, `min_price`, `category`, `min_rating`, `keywords`. Server applies the filters on `products.json` and returns matches.”
+4. Quick notes (25s): mention environment variable `OPENAI_API_KEY`, how to run locally, and limitations (small catalog, model might sometimes output unexpected JSON — we parse robustly but production hardening needed).
+5. End (10s): “Thanks — code and README are included. Happy to extend with embeddings, recommendations, or dynamic pricing.”
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+# 6) Bonus — blockchain integration (2–3 sentences)
+You can token-gate special pricing or discounts by issuing NFTs or on-chain tokens: for example, a smart contract could verify ownership of a loyalty NFT before applying a discounted price returned by the dynamic pricing engine. Also, on-chain user preferences (opt-in) could be stored hashed in a smart contract so decentralized apps can read user-preferences for personalized recommendations while maintaining auditability via the blockchain.
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
