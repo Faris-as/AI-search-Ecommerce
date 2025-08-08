@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "name": "Nike Air Max 270 Running Shoes",
+    "price": 120,
+    "category": "footwear",
+    "description": "Comfortable running shoes with air cushioning technology",
+    "rating": 4.5,
+    
+  },
+  {
+    "id": 2,
+    "name": "Apple MacBook Pro 16-inch",
+    "price": 2499,
+    "category": "electronics",
+    "description": "High-performance laptop for professionals",
+    "rating": 4.8,
+  }
+  {
+    "id": 3,
+    "name": "Levi's 501 Classic Jeans",
+    "price": 89,
+    "category": "clothing",
+    "description": "Timeless denim jeans with perfect fit",
+    "rating": 4.3,
+    
+  },
+  {
+    "id": 4,
+    "name": "Adidas Ultraboost 22",
+    "price": 180,
+    "category": "footwear",
+    "description": "Premium running shoes with boost technology",
+    "rating": 4.7,
+    
+  },
+  {
+    "id": 5,
+    "name": "Sony WH-1000XM5 Headphones",
+    "price": 399,
+    "category": "electronics",
+    "description": "Noise-canceling wireless headphones",
+    "rating": 4.6,
+  },
+  {
+    "id": 6,
+    "name": "Patagonia Fleece Jacket",
+    "price": 149,
+    "category": "clothing",
+    "description": "Warm and sustainable outdoor jacket",
+    "rating": 4.4,
+  },
+  {
+    "id": 7,
+    "name": "New Balance 990v5",
+    "price": 175,
+    "category": "footwear",
+    "description": "Classic sneakers / shoes with superior comfort",
+    "rating": 4.5,
+  },
+  {
+    "id": 8,
+    "name": "iPad Air 5th Generation",
+    "price": 599,
+    "category": "electronics",
+    "description": "Powerful tablet for work and creativity",
+    "rating": 4.7,
+  },
+  {
+    "id": 9,
+    "name": "Champion Hoodie",
+    "price": 55,
+    "category": "clothing",
+    "description": "Comfortable cotton blend hoodie",
+    "rating": 4.2,
+  },
+  {
+    "id": 10,
+    "name": "Converse Chuck Taylor All Star",
+    "price": 65,
+    "category": "footwear",
+    "description": "Classic canvas sneakers",
+    "rating": 4.1,
+  },
+  {
+    "id": 11,
+    "name": "Samsung Galaxy Watch 5",
+    "price": 329,
+    "category": "electronics",
+    "description": "Advanced smartwatch with health tracking",
+    "rating": 4.4,
+  },
+  {
+    "id": 12,
+    "name": "North Face T-Shirt",
+    "price": 35,
+    "category": "clothing",
+    "description": "Breathable outdoor performance tee",
+    "rating": 4.0,
+  }
+]
